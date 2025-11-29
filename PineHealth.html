@@ -1659,13 +1659,15 @@
     const submitBtn = document.getElementById('submitBtn');
     const formStatus = document.getElementById('formStatus');
 
-    form.addEventListener('submit', async function(e) {
+form.addEventListener('submit', async function(e) {
         e.preventDefault();
 
         const email = emailInput.value.trim();
+        const name = document.getElementById('name').value.trim();
+        const type = document.getElementById('type').value.trim();
         
-        if (!email) {
-            showStatus('Please enter a valid email address.', 'error');
+        if (!email || !name || !type) {
+            showStatus('Please fill in all fields.', 'error');
             return;
         }
 
@@ -1682,10 +1684,10 @@
             const params = {
                 user_email: email,
                 to_email: email,
-                user_name: 'PineHealth User',
-                organization: 'PineHealth',
-                interest: 'Medical AI Platform',
-                message: `New PineHealth pilot request from: ${email}`
+                user_name: name,
+                organization: type,
+                interest: 'PineHealth Pilot Program',
+                message: `New PineHealth pilot request from ${name} (${type}) - Email: ${email}`
             };
 
             // Send thank you email to the user
