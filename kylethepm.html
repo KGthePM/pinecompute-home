@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kyle Gomez - IT Project Coordinator & PM Professional</title>
+    <meta name="description" content="Kyle Gomez - Google PM Certified IT Project Coordinator with expertise in hybrid Agile/Waterfall methodologies, endpoint deployments, and cross-functional team leadership in hospitality IT.">
+    <meta name="theme-color" content="#0f4c3a" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;}
+        :root{
+            --void:#020617;--deep:#0a1f1a;--pine:#0f4c3a;--mist:#1a6b4f;
+            --glow:#2dd4bf;--glow-dark:#20a89a;--fog:#94a3b8;--smoke:#f8fafc;
+            --gradient-1:linear-gradient(135deg,#0a1f1a 0%,#0f4c3a 100%);
+            --gradient-2:linear-gradient(135deg,#2dd4bf 0%,#0a1f1a 100%);
+        }
+        body{
+            font-family:'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height:1.7;color:var(--fog);background:var(--void);overflow-x:hidden;
+        }
+        html{scroll-behavior:smooth;}
+
+        /* Nav */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(2,6,23,0.85);
+            backdrop-filter: blur(16px);
+            z-index: 9999;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid rgba(45,212,191,0.12);
+        }
+        .nav-container {
+            max-width: 1280px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-weight: 900;
+            font-size: 1.3rem;
+            color: var(--glow);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--fog);
+            text-decoration: none;
+            font-weight: 500;
+            opacity: 0.8;
+            transition: all .3s;
+        }
+        .nav-links a:hover { opacity: 1; color: var(--glow); }
+        .cta-button {
+            background: linear-gradient(135deg, var(--glow), var(--glow-dark));
+            color: #fff;
+            padding: 0.65rem 1.4rem;
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(45,212,191,0.3);
+            transition: all .3s;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(45,212,191,0.4);
+        }
+
+        /* Hero */
+        .hero{
+            min-height:100vh;padding:8rem 2rem 6rem;display:flex;align-items:center;
+            background:radial-gradient(circle at center,#0a1f1a 0%,#020617 100%);position:relative;overflow:hidden;
+        }
+        .hero::before{
+            content:"";position:absolute;inset:0;
+            background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="none" stroke="%232dd4bf20" stroke-width="0.5" d="M0 50h100M50 0v100"/></svg>') repeat;
+            opacity:0.03;animation:drift 40s linear infinite;
+        }
+        @keyframes drift{from{background-position:0 0}to{background-position:100px 100px}}
+        .hero-container{max-width:1200px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+        .hero-content h1{font-size:3.8rem;font-weight:900;line-height:1.05;background:linear-gradient(135deg, #2dd4bf, #94a3b8);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:fadeInUp 1s ease-out;}
+        .hero-content .tagline{font-size:1.5rem;color:var(--glow);font-weight:700;margin-bottom:1rem;opacity:0.9;animation:fadeInUp 1s ease-out .1s both;}
+        .hero-content p{font-size:1.2rem;opacity:0.85;margin:1.5rem 0 2rem;animation:fadeInUp 1s ease-out .2s both;line-height:1.8;}
+        .hero-buttons{display:flex;gap:1rem;animation:fadeInUp 1s ease-out .4s both;flex-wrap:wrap;}
+        .primary-button{background:linear-gradient(135deg, var(--glow), var(--glow-dark));color:#fff;padding:1rem 2rem;border-radius:12px;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;box-shadow:0 8px 30px rgba(45,212,191,0.35);transition:all .3s;}
+        .primary-button:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(45,212,191,0.5);}
+        .secondary-button{background:transparent;color:var(--glow);padding:1rem 2rem;border:2px solid var(--glow);border-radius:12px;font-weight:600;text-decoration:none;transition:all .3s;}
+        .secondary-button:hover{background:var(--glow);color:var(--deep);}
+
+        /* Portrait */
+        .portrait{
+            position:relative;animation:fadeInUp 1s ease-out .6s both;
+        }
+        .portrait img{
+            width:100%;border-radius:16px;filter:brightness(0.9);object-fit:cover;height:520px;
+            box-shadow:0 30px 60px rgba(0,0,0,0.5);
+        }
+        .portrait::after{
+            content:"";position:absolute;inset:0;background:linear-gradient(transparent 60%,var(--void) 100%);
+            border-radius:16px;pointer-events:none;
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            background: var(--deep);
+            padding: 3rem 2rem;
+            border-top: 1px solid rgba(45,212,191,0.2);
+            border-bottom: 1px solid rgba(45,212,191,0.2);
+        }
+        .stats-container {
+            max-width: 1200px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            text-align: center;
+        }
+        .stat-item h3 {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--glow);
+            margin-bottom: 0.5rem;
+        }
+        .stat-item p {
+            font-size: 1rem;
+            opacity: 0.8;
+            font-weight: 500;
+        }
+
+        /* Experience Section */
+        .experience {
+            padding: 6rem 2rem;
+            background: var(--void);
+        }
+        .experience-container {
+            max-width: 1000px;
+            margin: auto;
+        }
+        .experience h2 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 3rem;
+            color: var(--glow);
+            text-align: center;
+        }
+        .job {
+            background: rgba(45,212,191,0.03);
+            border: 1px solid rgba(45,212,191,0.15);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all .3s;
+        }
+        .job:hover {
+            background: rgba(45,212,191,0.05);
+            border-color: rgba(45,212,191,0.3);
+            transform: translateX(8px);
+        }
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .job-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--glow);
+        }
+        .job-company {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-top: 0.25rem;
+        }
+        .job-dates {
+            color: var(--fog);
+            opacity: 0.7;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .job ul {
+            list-style: none;
+            padding: 0;
+        }
+        .job li {
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            position: relative;
+            opacity: 0.85;
+            line-height: 1.7;
+        }
+        .job li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: var(--glow);
+            font-weight: 700;
+        }
+
+        /* Skills Section */
+        .skills {
+            padding: 6rem 2rem;
+            background: var(--deep);
+        }
+        .skills-container {
+            max-width: 1000px;
+            margin: auto;
+        }
+        .skills h2 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 3rem;
+            color: var(--glow);
+            text-align: center;
+        }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .skill-category {
+            background: rgba(45,212,191,0.03);
+            border: 1px solid rgba(45,212,191,0.15);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all .3s;
+        }
+        .skill-category:hover {
+            background: rgba(45,212,191,0.05);
+            border-color: rgba(45,212,191,0.3);
+            transform: translateY(-4px);
+        }
+        .skill-category h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--glow);
+            margin-bottom: 1rem;
+        }
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .skill-tag {
+            background: rgba(45,212,191,0.1);
+            color: var(--glow);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid rgba(45,212,191,0.2);
+        }
+
+        /* Certifications */
+        .certifications {
+            padding: 4rem 2rem;
+            background: var(--void);
+        }
+        .certifications-container {
+            max-width: 800px;
+            margin: auto;
+            text-align: center;
+        }
+        .certifications h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            color: var(--glow);
+        }
+        .cert-badges {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+        .cert-badge {
+            background: rgba(45,212,191,0.05);
+            border: 2px solid var(--glow);
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            min-width: 280px;
+        }
+        .cert-badge h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--glow);
+            margin-bottom: 0.5rem;
+        }
+        .cert-badge p {
+            opacity: 0.8;
+            font-size: 0.95rem;
+        }
+
+        /* Education */
+        .education {
+            padding: 4rem 2rem;
+            background: var(--deep);
+        }
+        .education-container {
+            max-width: 900px;
+            margin: auto;
+        }
+        .education h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            color: var(--glow);
+            text-align: center;
+        }
+        .education-item {
+            background: rgba(45,212,191,0.03);
+            border: 1px solid rgba(45,212,191,0.15);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        .education-item h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--glow);
+        }
+        .education-item .degree {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+        }
+        .education-item .dates {
+            opacity: 0.7;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        /* CTA / Contact Section */
+        .contact {
+            padding: 6rem 2rem;
+            background: var(--void);
+            text-align: center;
+        }
+        .contact h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--glow);
+            margin-bottom: 1rem;
+        }
+        .contact p {
+            font-size: 1.2rem;
+            opacity: 0.85;
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .contact-button {
+            background: linear-gradient(135deg, var(--glow), var(--glow-dark));
+            color: #fff;
+            padding: 1rem 2.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            box-shadow: 0 8px 30px rgba(45,212,191,0.35);
+            transition: all .3s;
+            font-size: 1.05rem;
+        }
+        .contact-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 40px rgba(45,212,191,0.5);
+        }
+        .contact-info {
+            margin-top: 3rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(45,212,191,0.2);
+        }
+        .contact-info p {
+            font-size: 1rem;
+            opacity: 0.7;
+        }
+        .contact-info a {
+            color: var(--glow);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--deep);
+            padding: 3rem 2rem 2rem;
+            border-top: 1px solid rgba(45,212,191,0.2);
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: auto;
+            text-align: center;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-container { grid-template-columns: 1fr; gap: 3rem; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .nav-links { display: none; }
+            .stats-container { grid-template-columns: 1fr; gap: 2rem; }
+            .hero-buttons { flex-direction: column; width: 100%; }
+            .primary-button, .secondary-button { text-align: center; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">Kyle Gomez</a>
+            <ul class="nav-links">
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#education">Education</a></li>
+            </ul>
+            <a href="#contact" class="cta-button">Hire Me</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Kyle Gomez</h1>
+                <div class="tagline">IT Project Coordinator | Google PM Certified | PMI Member</div>
+                <p>Leading enterprise-wide technology rollouts with hybrid Agile + Waterfall methodologies. Delivering projects 25% faster while maintaining 99% stakeholder satisfaction in hospitality IT operations.</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="primary-button">
+                        <span>📧</span>
+                        Connect With Me
+                    </a>
+                    <a href="#experience" class="secondary-button">View Experience</a>
+                </div>
+            </div>
+            <div class="portrait">
+                <img src="https://i.imgur.com/L6OVTLM.jpeg" alt="Kyle Gomez">
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <section class="stats-bar">
+        <div class="stats-container">
+            <div class="stat-item">
+                <h3>25%</h3>
+                <p>Faster Project Delivery</p>
+            </div>
+            <div class="stat-item">
+                <h3>99%</h3>
+                <p>Stakeholder Satisfaction</p>
+            </div>
+            <div class="stat-item">
+                <h3>15+</h3>
+                <p>Cross-Functional Team Members</p>
+            </div>
+            <div class="stat-item">
+                <h3>100+</h3>
+                <p>Endpoint Devices Deployed</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience">
+        <div class="experience-container">
+            <h2>Professional Experience</h2>
+            
+            <div class="job">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">IT Project Coordinator</div>
+                        <div class="job-company">Resorts Casino Hotel – Atlantic City, NJ</div>
+                    </div>
+                    <div class="job-dates">Dec 2023 – Present</div>
+                </div>
+                <ul>
+                    <li>Direct enterprise-wide IT initiatives including endpoint device deployments and POS rollouts using Intune MDM, Apple Business Manager, and InfoGenesis; apply hybrid PMBOK methodology (Waterfall for hardware, Agile for software), cutting project timelines 25% via JIRA scheduling and critical path analysis.</li>
+                    <li>Lead 15+ cross-functional team members and 3rd-party vendors; deliver scope, budget, and quality baselines using project charters, resource-loaded schedules, and cost controls.</li>
+                    <li>Deploy and manage 100+ endpoint devices and POS terminals; streamline device provisioning through standardized imaging, configuration profiles, and automated enrollment workflows.</li>
+                    <li>Develop risk registers and contingency plans with 90%+ mitigation success; reduce user errors 15% through structured stakeholder reporting and end-user training.</li>
+                    <li>Achieve 99% stakeholder satisfaction by aligning IT solutions with business goals in hospitality operations.</li>
+                </ul>
+            </div>
+
+            <div class="job">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">Founder & Technical Lead (Part-Time)</div>
+                        <div class="job-company">Pine Compute NJ –  NJ</div>
+                    </div>
+                    <div class="job-dates">Aug 2024 – Present</div>
+                </div>
+                <ul>
+                    <li>Founded technology services startup; manage full project lifecycle from business case development through service delivery for residential and small business IT consulting clients.</li>
+                    <li>Lead technical development initiatives including web platform design and AI integration research; coordinate vendor relationships and resource allocation.</li>
+                    <li>Design business operations framework and quality assurance protocols; manage stakeholder expectations and project timelines across multiple concurrent initiatives.</li>
+                </ul>
+            </div>
+
+            <div class="job">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">IT Support Supervisor</div>
+                        <div class="job-company">Brandywine Technologies – Hockessin, DE</div>
+                    </div>
+                    <div class="job-dates">Jun 2023 – Dec 2023</div>
+                </div>
+                <ul>
+                    <li>Managed high-volume support tickets using prioritization frameworks, maintaining 99% customer satisfaction and reducing resolution time 25%.</li>
+                    <li>Trained 10+ end-users on new software and troubleshooting protocols, boosting system adoption 10% and cutting recurring tickets.</li>
+                    <li>Created technical documentation and knowledge base, enabling faster onboarding and cross-team collaboration.</li>
+                </ul>
+            </div>
+
+            <div class="job">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">EMT-B Team Lead & Quality Assurance Manager</div>
+                        <div class="job-company">North State Medical Transport / Sessoms Medical Associates – Raleigh, NC</div>
+                    </div>
+                    <div class="job-dates">Nov 2020 – Nov 2021 / Oct 2019 – Aug 2020</div>
+                </div>
+                <ul>
+                    <li>Designed standardized training and QA protocols, reducing new hire onboarding 20% while ensuring regulatory compliance.</li>
+                    <li>Led process improvement initiatives integrating compliance software, improving operational efficiency 20% and patient care metrics 30%.</li>
+                </ul>
+            </div>
+
+            <div class="job">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">EMT-B & Technical Research Project Lead</div>
+                        <div class="job-company">BU Fitness & Recreation / Boston University Neuroimaging Lab – Boston, MA</div>
+                    </div>
+                    <div class="job-dates">Sep 2018 – May 2019 / Jan 2017 – May 2017</div>
+                </div>
+                <ul>
+                    <li>Coordinated emergency response protocols across campus departments and led research projects with Harvard Brain Science Center.</li>
+                    <li>Managed schedules, resources, and data quality control; developed protocols for neuroimaging experiments using MATLAB.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="skills-container">
+            <h2>Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Project Management Tools</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">JIRA</span>
+                        <span class="skill-tag">Asana</span>
+                        <span class="skill-tag">Monday.com</span>
+                        <span class="skill-tag">Trello</span>
+                        <span class="skill-tag">MS Project</span>
+                        <span class="skill-tag">Gantt Charts</span>
+                        <span class="skill-tag">WBS</span>
+                        <span class="skill-tag">RAID Logs</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Methodologies</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">PMBOK</span>
+                        <span class="skill-tag">Agile</span>
+                        <span class="skill-tag">Scrum</span>
+                        <span class="skill-tag">Waterfall</span>
+                        <span class="skill-tag">Hybrid</span>
+                        <span class="skill-tag">SDLC</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Technical Platforms</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Microsoft 365</span>
+                        <span class="skill-tag">Intune MDM</span>
+                        <span class="skill-tag">Apple Business Manager</span>
+                        <span class="skill-tag">Google Workspace</span>
+                        <span class="skill-tag">Confluence</span>
+                        <span class="skill-tag">InfoGenesis POS</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Languages</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Spanish (Fluent)</span>
+                        <span class="skill-tag">English (Native)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications -->
+    <section class="certifications">
+        <div class="certifications-container">
+            <h2>Certifications</h2>
+            <div class="cert-badges">
+                <div class="cert-badge">
+                    <h3>Google Project Management Certificate</h3>
+                    <p>Coursera, 2024</p>
+                </div>
+                <div class="cert-badge">
+                    <h3>Project Management Institute (PMI)</h3>
+                    <p>Active Member, 2024</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education" class="education">
+        <div class="education-container">
+            <h2>Education</h2>
+            <div class="education-item">
+                <h3>Boston University</h3>
+                <div class="degree">B.A. Neuroscience</div>
+                <div class="dates">September 2015 – May 2019</div>
+            </div>
+            <div class="education-item">
+                <h3>Temple University</h3>
+                <div class="degree">Post-Baccalaureate Certificate, Basic Core Science</div>
+                <div class="dates">May 2022 – May 2023</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2>Let's Connect</h2>
+        <p>I'm actively seeking project management opportunities—based in Philadelphia or fully remote. If you're looking for an experienced Project Manager to drive your technology initiatives, let's talk.</p>
+        <div class="contact-buttons">
+            <a href="mailto:kgomez2k19@gmail.com" class="contact-button">
+                <span>📧</span>
+                Email Me
+            </a>
+            <a href="tel:6098927114" class="contact-button">
+                <span>📱</span>
+                Call Me
+            </a>
+        </div>
+        <div class="contact-info">
+            <p>Philadelphia, PA 19130</p>
+            <p><a href="mailto:kgomez2k19@gmail.com">kgomez2k19@gmail.com</a> | <a href="tel:6098927114">(609) 892-7114</a></p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>© 2025 Kyle Gomez. All rights reserved.</p>
+            <p style="margin-top:0.5rem;">Google PM Certified | PMI Member | Fluent in Spanish</p>
+        </div>
+    </footer>
+
+    <!-- Scroll Animation Script -->
+    <script>
+        const obs = new IntersectionObserver(es=>es.forEach(e=>{
+            if(e.isIntersecting){
+                e.target.style.animation='fadeInUp .8s ease-out';
+                e.target.style.opacity=1;
+            }
+        }), {threshold:0.15});
+        
+        document.querySelectorAll('.job, .skill-category, .cert-badge, .education-item, .stat-item').forEach(el=>{
+            el.style.opacity=0;
+            obs.observe(el);
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1900 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PineHealth — Private Medical AI Platform for Everyone</title>
+
+<!-- EmailJS SDK - Load this FIRST -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<style>
+    :root {
+        --deep: #0a1f1a;
+        --pine: #0f4c3a;
+        --mist: #1a6b4f;
+        --glow: #2dd4bf;
+        --fog: #94a3b8;
+        --void: #020617;
+        --smoke: #f8fafc;
+        --gradient-1: linear-gradient(135deg, #2dd4bf 0%, #10b981 100%);
+        --gradient-2: linear-gradient(135deg, #2dd4bf 0%, #0a1f1a 100%);
+    }
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        line-height: 1.7;
+        color: var(--fog);
+        background: var(--void);
+        overflow-x: hidden;
+    }
+    html { scroll-behavior: smooth; }
+
+    /* Top Banner - FIXED */
+    .veil {
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        background: rgba(10,31,26,0.95);
+        backdrop-filter: blur(4px);
+        color: var(--glow);
+        text-align: center;
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+        z-index: 1001;
+        border-bottom: 1px solid var(--glow);
+        line-height: 1.3;
+    }
+    .veil a { color: var(--smoke); text-decoration: underline; margin-left: 0.5rem; }
+
+    /* Navigation - FIXED */
+    nav {
+        position: fixed;
+        top: 36px;
+        width: 100%;
+        background: rgba(2,6,23,0.9);
+        backdrop-filter: blur(12px);
+        z-index: 1000;
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid rgba(45,212,191,0.1);
+    }
+    .nav-container { 
+        max-width:1200px; 
+        margin:auto; 
+        display:flex; 
+        justify-content:space-between; 
+        align-items:center; 
+    }
+    .logo {
+        font-weight: 800;
+        color: var(--glow);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 1.3rem;
+    }
+    .logo-icon {
+        width: 36px; height: 36px;
+        background: var(--gradient-2);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+    }
+    .nav-links { display:flex; gap:2rem; list-style:none; }
+    .nav-links a { color:var(--fog); text-decoration:none; font-weight:500; opacity:0.7; transition:opacity .3s; }
+    .nav-links a:hover { opacity:1; color:var(--glow); }
+    
+    /* Mobile Menu Toggle - FIXED */
+    .menu-toggle {
+        display: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0.5rem;
+        z-index: 1002;
+    }
+    .menu-toggle span {
+        display: block;
+        width: 24px;
+        height: 2px;
+        background: var(--glow);
+        margin: 5px 0;
+        transition: 0.3s;
+    }
+    .menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+    .menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
+    
+    /* Mobile Menu - FIXED */
+    .mobile-menu {
+        display: none;
+        position: fixed;
+        top: 100px;
+        left: 0;
+        right: 0;
+        background: rgba(2,6,23,0.98);
+        backdrop-filter: blur(12px);
+        padding: 1rem;
+        z-index: 999;
+        border-bottom: 1px solid rgba(45,212,191,0.2);
+        max-height: calc(100vh - 100px);
+        overflow-y: auto;
+    }
+    .mobile-menu.active {
+        display: block;
+    }
+    .mobile-menu a {
+        display: block;
+        color: var(--fog);
+        text-decoration: none;
+        padding: 0.75rem 1rem;
+        font-weight: 500;
+        border-radius: 8px;
+        transition: all 0.3s;
+    }
+    .mobile-menu a:hover {
+        background: rgba(45,212,191,0.1);
+        color: var(--glow);
+    }
+    
+    .cta-button {
+        background: var(--gradient-2);
+        color: #fff;
+        padding: 0.65rem 1.4rem;
+        border-radius: 8px;
+        font-weight: 600;
+        text-decoration:none;
+        font-size:0.95rem;
+        box-shadow: 0 0 20px rgba(45,212,191,0.2);
+        white-space: nowrap;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .cta-button:hover {
+        transform: scale(1.03);
+        box-shadow: 0 0 30px rgba(45,212,191,0.4);
+    }
+
+    /* Hero */
+    .hero {
+        min-height:100vh;
+        padding: 10rem 1.5rem 4rem;
+        display:flex;
+        align-items:center;
+        background: radial-gradient(circle at center, #0a1f1a 0%, #020617 100%);
+        position:relative;
+        overflow:hidden;
+    }
+    .hero::before {
+        content:"";
+        position:absolute;
+        inset:0;
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="none" stroke="%232dd4bf20" stroke-width="0.5" d="M0 50h100M50 0v100"/></svg>') repeat;
+        opacity:0.03;
+        animation: drift 40s linear infinite;
+    }
+    @keyframes drift { from { background-position:0 0; } to { background-position:100px 100px; } }
+    .hero-container { max-width:1200px; margin:auto; display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center; }
+    
+    .hero-content h1 {
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        font-weight: 900;
+        line-height: 1.15;
+        color: var(--glow);
+        animation: fadeInUp 1s ease-out;
+    }
+    .highlight { 
+        position: relative;
+        color: var(--smoke);
+    }
+    .highlight::after {
+        content:""; 
+        position:absolute; 
+        bottom: 2px; 
+        left:0; 
+        width:100%; 
+        height: 8px;
+        background: rgba(45,212,191,0.3); 
+        z-index:-1; 
+        border-radius: 2px;
+    }
+    .hero-content p { 
+        font-size: clamp(1rem, 2.5vw, 1.25rem); 
+        opacity:0.9; 
+        margin:1.5rem 0 2rem; 
+        animation:fadeInUp 1s ease-out .2s both;
+        color: var(--fog);
+    }
+    .status-badge {
+        display:inline-block; 
+        background:rgba(45,212,191,0.15); 
+        color:var(--glow);
+        padding:0.4rem 1rem; 
+        border-radius:50px; 
+        font-weight:600; 
+        font-size:0.85rem;
+        border:1px solid var(--glow); 
+        margin-bottom: 1rem;
+    }
+    .hero-buttons { display:flex; gap:1rem; animation:fadeInUp 1s ease-out .4s both; flex-wrap: wrap; }
+    .primary-button {
+        background:var(--gradient-2); 
+        color:#fff; 
+        padding:1rem 1.75rem; 
+        border-radius:12px;
+        font-weight:600; 
+        text-decoration:none; 
+        display:inline-flex; 
+        align-items:center; 
+        gap:0.5rem;
+        box-shadow:0 0 30px rgba(45,212,191,0.3);
+        transition:transform .3s, box-shadow .3s;
+    }
+    .primary-button:hover { transform:translateY(-2px); box-shadow:0 0 40px rgba(45,212,191,0.5); }
+    .secondary-button {
+        background:rgba(45,212,191,0.1); 
+        color:var(--glow); 
+        padding:1rem 1.75rem; 
+        border-radius:12px;
+        border:1px solid var(--glow); 
+        font-weight:600; 
+        text-decoration:none; 
+        display:inline-flex; 
+        align-items:center; 
+        gap:0.5rem;
+        transition:background .3s;
+    }
+    .secondary-button:hover { background:rgba(45,212,191,0.2); }
+
+    .hero-visual {
+        position: relative;
+        padding: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    @keyframes fadeInUp { from { opacity:0; transform:translateY(40px); } to { opacity:1; transform:translateY(0); } }
+
+    /* Terminal */
+    .terminal {
+        background: rgba(2,6,23,0.8);
+        border: 1px solid rgba(45,212,191,0.3);
+        border-radius: 16px;
+        padding: 1.5rem;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        max-width: 500px;
+        backdrop-filter: blur(10px);
+    }
+    .terminal-header {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid rgba(45,212,191,0.2);
+    }
+    .terminal-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--fog);
+        opacity: 0.4;
+    }
+    .terminal-dot:first-child { background: #ef4444; opacity: 0.8; }
+    .terminal-body {
+        font-family: 'Courier New', monospace;
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+    .terminal-line {
+        margin: 0.5rem 0;
+        opacity: 0;
+        animation: fadeIn 0.8s ease-out forwards;
+    }
+    .terminal-line:nth-child(1) { animation-delay: 0.3s; }
+    .terminal-line:nth-child(2) { animation-delay: 0.8s; }
+    .terminal-line:nth-child(3) { animation-delay: 1.3s; }
+    .terminal-line:nth-child(4) { animation-delay: 1.8s; }
+    .terminal-line:nth-child(5) { animation-delay: 2.3s; }
+    .terminal-line:nth-child(6) { animation-delay: 2.8s; }
+    .terminal-prompt { color: var(--glow); }
+    .terminal-output { color: var(--fog); padding-left: 1.5rem; }
+    .terminal-success { color: #10b981; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    /* Section Styles */
+    section {
+        padding: 5rem 1.5rem;
+        position: relative;
+    }
+    .section-header {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto 3rem;
+    }
+    .section-label {
+        display: inline-block;
+        background: rgba(45,212,191,0.1);
+        color: var(--glow);
+        padding: 0.4rem 1rem;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 0.85rem;
+        border: 1px solid var(--glow);
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .section-header h2 {
+        font-size: clamp(2rem, 4vw, 2.75rem);
+        font-weight: 800;
+        color: var(--glow);
+        margin-bottom: 1rem;
+        line-height: 1.2;
+    }
+    .section-header p {
+        font-size: 1.15rem;
+        color: var(--fog);
+        opacity: 0.9;
+    }
+
+    /* Problem Section */
+    .problems-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: auto;
+    }
+    .problem-card {
+        background: rgba(15,76,58,0.1);
+        border: 1px solid rgba(45,212,191,0.2);
+        border-radius: 16px;
+        padding: 2rem;
+        transition: all 0.3s;
+    }
+    .problem-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--glow);
+        box-shadow: 0 8px 24px rgba(45,212,191,0.15);
+    }
+    .problem-icon {
+        width: 56px;
+        height: 56px;
+        background: var(--gradient-2);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.75rem;
+        margin-bottom: 1.25rem;
+    }
+    .problem-card h3 {
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--glow);
+        margin-bottom: 0.75rem;
+    }
+    .problem-card p {
+        color: var(--fog);
+        line-height: 1.7;
+    }
+
+    /* Features Grid */
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: auto;
+    }
+    .feature-card {
+        background: rgba(10,31,26,0.4);
+        border: 1px solid rgba(45,212,191,0.2);
+        border-radius: 16px;
+        padding: 2rem;
+        transition: all 0.3s;
+    }
+    .feature-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--glow);
+        box-shadow: 0 8px 24px rgba(45,212,191,0.15);
+    }
+    .feature-icon {
+        width: 56px;
+        height: 56px;
+        background: var(--gradient-2);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.75rem;
+        margin-bottom: 1.25rem;
+    }
+    .feature-card h3 {
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--glow);
+        margin-bottom: 0.75rem;
+    }
+    .feature-card p {
+        color: var(--fog);
+        line-height: 1.7;
+    }
+
+    /* How It Works */
+    .flow-steps {
+        display: grid;
+        gap: 2rem;
+        max-width: 900px;
+        margin: auto;
+    }
+    .flow-step {
+        display: grid;
+        grid-template-columns: 80px 1fr;
+        gap: 2rem;
+        align-items: start;
+        padding: 2rem;
+        background: rgba(10,31,26,0.3);
+        border: 1px solid rgba(45,212,191,0.2);
+        border-radius: 16px;
+        transition: all 0.3s;
+    }
+    .flow-step:hover {
+        border-color: var(--glow);
+        box-shadow: 0 4px 16px rgba(45,212,191,0.15);
+    }
+    .step-number {
+        width: 80px;
+        height: 80px;
+        background: var(--gradient-2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        font-weight: 800;
+        color: #fff;
+        box-shadow: 0 4px 16px rgba(45,212,191,0.3);
+    }
+    .step-content h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--glow);
+        margin-bottom: 0.75rem;
+    }
+    .step-content p {
+        color: var(--fog);
+        line-height: 1.7;
+    }
+
+    /* Use Cases - ENHANCED */
+    .use-cases-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: auto;
+    }
+    .use-case {
+        background: rgba(10,31,26,0.4);
+        border: 1px solid rgba(45,212,191,0.2);
+        border-radius: 16px;
+        padding: 2rem;
+        transition: all 0.3s;
+        display: flex;
+        flex-direction: column;
+    }
+    .use-case:hover {
+        transform: translateY(-5px);
+        border-color: var(--glow);
+        box-shadow: 0 8px 24px rgba(45,212,191,0.15);
+    }
+    .use-case-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+    .use-case-icon {
+        width: 56px;
+        height: 56px;
+        background: var(--gradient-2);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.75rem;
+        flex-shrink: 0;
+    }
+    .use-case h3 {
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--glow);
+        margin: 0;
+    }
+    .use-case-label {
+        display: inline-block;
+        background: rgba(45,212,191,0.15);
+        color: var(--glow);
+        padding: 0.3rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .use-case p {
+        color: var(--fog);
+        line-height: 1.7;
+        margin-bottom: 1rem;
+        flex-grow: 1;
+    }
+    .use-case-details {
+        margin-top: auto;
+    }
+    .use-case-details h4 {
+        color: var(--glow);
+        font-size: 0.95rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        margin-top: 1rem;
+    }
+    .use-case ul {
+        list-style: none;
+        padding: 0;
+        margin: 0.5rem 0;
+    }
+    .use-case li {
+        color: var(--fog);
+        padding: 0.4rem 0;
+        padding-left: 1.5rem;
+        position: relative;
+        font-size: 0.95rem;
+    }
+    .use-case li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--glow);
+        font-weight: 700;
+    }
+    .use-case-outcome {
+        background: rgba(45,212,191,0.05);
+        border: 1px solid rgba(45,212,191,0.2);
+        border-radius: 8px;
+        padding: 1rem;
+        margin-top: 1rem;
+    }
+    .use-case-outcome strong {
+        color: var(--glow);
+        display: block;
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+    }
+    .use-case-outcome p {
+        margin: 0;
+        font-size: 0.9rem;
+    }
+
+    /* Implementation Models Section */
+    .implementation-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: auto;
+    }
+    .implementation-card {
+        background: rgba(15,76,58,0.1);
+        border: 1px solid rgba(45,212,191,0.2);
+        border-radius: 16px;
+        padding: 2rem;
+        transition: all 0.3s;
+        position: relative;
+        overflow: hidden;
+    }
+    .implementation-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--glow);
+        box-shadow: 0 8px 24px rgba(45,212,191,0.15);
+    }
+    .implementation-badge {
+        display: inline-block;
+        background: var(--gradient-2);
+        color: #fff;
+        padding: 0.4rem 1rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .implementation-card h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--glow);
+        margin-bottom: 0.75rem;
+    }
+    .implementation-card p {
+        color: var(--fog);
+        line-height: 1.7;
+        margin-bottom: 1.5rem;
+    }
+    .implementation-features {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 1.5rem;
+    }
+    .implementation-features li {
+        color: var(--fog);
+        padding: 0.5rem 0;
+        padding-left: 1.75rem;
+        position: relative;
+        border-bottom: 1px solid rgba(45,212,191,0.1);
+    }
+    .implementation-features li:last-child {
+        border-bottom: none;
+    }
+    .implementation-features li::before {
+        content: "→";
+        position: absolute;
+        left: 0;
+        color: var(--glow);
+        font-weight: 700;
+    }
+    .implementation-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--glow);
+        font-weight: 600;
+        text-decoration: none;
+        transition: transform 0.3s;
+    }
+    .implementation-cta:hover {
+        transform: translateX(5px);
+    }
+
+    /* CTA Section */
+    .cta-section {
+        background: radial-gradient(circle at center, #0f4c3a 0%, #0a1f1a 100%);
+        border-top: 1px solid rgba(45,212,191,0.2);
+        border-bottom: 1px solid rgba(45,212,191,0.2);
+    }
+    .cta-content {
+        max-width: 800px;
+        margin: auto;
+        text-align: center;
+    }
+    .cta-content h2 {
+        font-size: clamp(2rem, 4vw, 2.75rem);
+        font-weight: 800;
+        color: var(--glow);
+        margin-bottom: 1rem;
+    }
+    .cta-content p {
+        font-size: 1.15rem;
+        color: var(--fog);
+        margin-bottom: 2rem;
+    }
+    .cta-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 2rem;
+    }
+    .cta-option {
+        background: rgba(2,6,23,0.6);
+        border: 1px solid rgba(45,212,191,0.3);
+        border-radius: 12px;
+        padding: 1.5rem;
+        flex: 1;
+        min-width: 250px;
+        max-width: 350px;
+        transition: all 0.3s;
+    }
+    .cta-option:hover {
+        border-color: var(--glow);
+        box-shadow: 0 4px 16px rgba(45,212,191,0.2);
+    }
+    .cta-option h4 {
+        color: var(--glow);
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+    }
+    .cta-option p {
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+    }
+
+    /* Pilot Program Form */
+    .pilot-form {
+        max-width: 500px;
+        margin: 2rem auto 0;
+        padding: 2rem;
+        background: rgba(2,6,23,0.6);
+        border: 1px solid rgba(45,212,191,0.3);
+        border-radius: 16px;
+        backdrop-filter: blur(10px);
+    }
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+    .form-group label {
+        display: block;
+        color: var(--glow);
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        font-size: 0.95rem;
+    }
+    .form-group input {
+        width: 100%;
+        padding: 1rem;
+        background: rgba(10,31,26,0.6);
+        border: 1px solid rgba(45,212,191,0.3);
+        border-radius: 8px;
+        color: var(--smoke);
+        font-size: 1rem;
+        transition: all 0.3s;
+    }
+    .form-group input:focus {
+        outline: none;
+        border-color: var(--glow);
+        box-shadow: 0 0 0 3px rgba(45,212,191,0.1);
+    }
+    .submit-button {
+        width: 100%;
+        padding: 1rem;
+        background: var(--gradient-2);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s;
+        box-shadow: 0 4px 16px rgba(45,212,191,0.3);
+    }
+    .submit-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 24px rgba(45,212,191,0.4);
+    }
+    .submit-button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+    .form-status {
+        margin-top: 1rem;
+        padding: 1rem;
+        border-radius: 8px;
+        text-align: center;
+        font-weight: 500;
+    }
+    .form-status.success {
+        background: rgba(16,185,129,0.1);
+        border: 1px solid #10b981;
+        color: #10b981;
+    }
+    .form-status.error {
+        background: rgba(239,68,68,0.1);
+        border: 1px solid #ef4444;
+        color: #ef4444;
+    }
+
+    /* Demo Section */
+    .demo-section {
+        background: rgba(10,31,26,0.3);
+    }
+    .demo-container {
+        max-width: 700px;
+        margin: auto;
+        text-align: center;
+    }
+    .demo-box {
+        background: rgba(2,6,23,0.6);
+        border: 1px solid rgba(45,212,191,0.3);
+        border-radius: 16px;
+        padding: 2.5rem 2rem;
+        backdrop-filter: blur(10px);
+    }
+    .demo-status {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        margin-bottom: 2rem;
+        font-size: 0.95rem;
+        color: var(--fog);
+    }
+    .status-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--fog);
+        opacity: 0.3;
+        transition: all 0.3s;
+    }
+    .status-dot.live {
+        background: #10b981;
+        opacity: 1;
+        box-shadow: 0 0 12px #10b981;
+        animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+    }
+    .demo-input-group {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+    .demo-input {
+        flex: 1;
+        padding: 1rem;
+        background: rgba(10,31,26,0.6);
+        border: 1px solid rgba(45,212,191,0.3);
+        border-radius: 8px;
+        color: var(--smoke);
+        font-size: 1rem;
+        font-family: 'Courier New', monospace;
+    }
+    .demo-input:focus {
+        outline: none;
+        border-color: var(--glow);
+        box-shadow: 0 0 0 3px rgba(45,212,191,0.1);
+    }
+    .demo-button {
+        padding: 1rem 2rem;
+        background: var(--gradient-2);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        white-space: nowrap;
+    }
+    .demo-button:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 24px rgba(45,212,191,0.4);
+    }
+    .demo-button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+    .demo-error {
+        margin-top: 1rem;
+        padding: 1rem;
+        background: rgba(239,68,68,0.1);
+        border: 1px solid #ef4444;
+        color: #ef4444;
+        border-radius: 8px;
+        display: none;
+    }
+    .demo-error.show {
+        display: block;
+    }
+    .demo-help {
+        margin-top: 1.5rem;
+        padding: 1.5rem;
+        background: rgba(45,212,191,0.05);
+        border: 1px solid rgba(45,212,191,0.2);
+        border-radius: 12px;
+        text-align: left;
+    }
+    .demo-help h4 {
+        color: var(--glow);
+        margin-bottom: 0.75rem;
+        font-size: 1.1rem;
+    }
+    .demo-help p {
+        color: var(--fog);
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 0.5rem;
+    }
+    .demo-help code {
+        background: rgba(2,6,23,0.6);
+        padding: 0.2rem 0.5rem;
+        border-radius: 4px;
+        color: var(--glow);
+        font-family: 'Courier New', monospace;
+        font-size: 0.9rem;
+    }
+
+    /* Footer - ENHANCED WITH LINKS */
+    footer {
+        background: rgba(2,6,23,0.8);
+        border-top: 1px solid rgba(45,212,191,0.2);
+        padding: 3rem 1.5rem 1.5rem;
+    }
+    .footer-container {
+        max-width: 1200px;
+        margin: auto;
+    }
+    .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 3rem;
+        margin-bottom: 3rem;
+    }
+    .footer-section h4 {
+        color: var(--glow);
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+    .footer-section p {
+        color: var(--fog);
+        line-height: 1.7;
+        margin-bottom: 1rem;
+    }
+    .footer-links {
+        list-style: none;
+        padding: 0;
+    }
+    .footer-links li {
+        margin-bottom: 0.75rem;
+    }
+    .footer-links a {
+        color: var(--fog);
+        text-decoration: none;
+        transition: color 0.3s;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    .footer-links a:hover {
+        color: var(--glow);
+    }
+    .footer-bottom {
+        padding-top: 2rem;
+        border-top: 1px solid rgba(45,212,191,0.1);
+        text-align: center;
+        color: var(--fog);
+        font-size: 0.9rem;
+    }
+
+    /* Mobile Responsive - FIXED */
+    @media (max-width: 768px) {
+        .veil {
+            font-size: 0.75rem;
+            padding: 0.4rem 0.75rem;
+            line-height: 1.2;
+        }
+        
+        nav {
+            padding: 0.75rem 1rem;
+            top: 32px;
+        }
+        
+        .nav-container {
+            justify-content: space-between;
+        }
+        
+        .logo {
+            font-size: 1.1rem;
+        }
+        
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            font-size: 1rem;
+        }
+        
+        .nav-links {
+            display: none;
+        }
+        
+        .menu-toggle {
+            display: block;
+        }
+        
+        .cta-button {
+            display: none;
+        }
+        
+        .mobile-menu {
+            top: 88px;
+        }
+        
+        .hero {
+            padding: 8rem 1rem 3rem;
+            min-height: auto;
+        }
+        
+        .hero-container {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        
+        .hero-visual {
+            order: -1;
+            padding: 1rem;
+        }
+        
+        .terminal {
+            max-width: 100%;
+            padding: 1rem;
+        }
+        
+        .terminal-body {
+            font-size: 0.8rem;
+        }
+        
+        section {
+            padding: 3rem 1rem;
+        }
+        
+        .section-header {
+            margin-bottom: 2rem;
+        }
+        
+        .problems-grid,
+        .features-grid,
+        .use-cases-grid,
+        .implementation-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        .flow-step {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            padding: 1.5rem;
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+            margin: 0 auto;
+        }
+        
+        .pilot-form {
+            padding: 1.5rem;
+        }
+        
+        .demo-input-group {
+            flex-direction: column;
+        }
+        
+        .demo-box {
+            padding: 1.5rem;
+        }
+        
+        .footer-grid {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .cta-buttons {
+            flex-direction: column;
+        }
+
+        .cta-option {
+            max-width: 100%;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<!-- Top Banner -->
+<div class="veil">
+    🌲 Now accepting pilot program applications • 
+    <a href="#pilot">Join the waitlist</a>
+</div>
+
+<!-- Navigation -->
+<nav>
+    <div class="nav-container">
+        <div class="logo">
+            <img src="https://i.imgur.com/YEjOO2w.png" alt="Pine icon" style="width: 50px; height: 50px; margin-right: 8px; vertical-align: middle;">
+            Pine<span style="color: var(--smoke);">Health</span>
+        </div>
+        
+        <!-- Desktop Navigation -->
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#use-cases">Use Cases</a></li>
+            <li><a href="#demo">Demo</a></li>
+        </ul>
+        
+        <a href="#pilot" class="cta-button">Join Pilot Program</a>
+        
+        <!-- Mobile Menu Toggle -->
+        <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" onclick="closeMenu()">Home</a>
+    <a href="#about" onclick="closeMenu()">About</a>
+    <a href="#features" onclick="closeMenu()">Features</a>
+    <a href="#use-cases" onclick="closeMenu()">Use Cases</a>
+    <a href="#how-it-works" onclick="closeMenu()">How It Works</a>
+    <a href="#demo" onclick="closeMenu()">Demo</a>
+    <a href="#pilot" onclick="closeMenu()">Join Pilot Program</a>
+    <a href="https://pinecomputenj.com" onclick="closeMenu()">← Back to PineCompute</a>
+    <a href="https://pinecomputenj.com/founders.html" onclick="closeMenu()">Meet the Founders</a>
+</div>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-container">
+        <div class="hero-content">
+            <div class="status-badge">🏥 In Development • R&D Phase</div>
+            <h1>
+                A <span class="highlight">Private Medical AI</span> That Never Leaves Your Network
+            </h1>
+            <p>
+                Transform medical textbooks, clinical guidelines, and research papers into an expert AI assistant. For individuals, clinics, and organizations—complete privacy, infinite queries, zero data transmission.
+            </p>
+            <div class="hero-buttons">
+                <a href="#pilot" class="primary-button">
+                    Request Early Access →
+                </a>
+                <a href="#how-it-works" class="secondary-button">
+                    See How It Works
+                </a>
+            </div>
+        </div>
+
+        <div class="hero-visual">
+            <div class="terminal">
+                <div class="terminal-header">
+                    <span class="terminal-dot"></span>
+                    <span class="terminal-dot"></span>
+                    <span class="terminal-dot"></span>
+                </div>
+                <div class="terminal-body">
+                    <div class="terminal-line">
+                        <span class="terminal-prompt">$</span> pine-health query
+                    </div>
+                    <div class="terminal-line terminal-output">
+                        "What are the updated hypertension treatment protocols?"
+                    </div>
+                    <div class="terminal-line terminal-success">
+                        ✓ Searching 47 medical documents...
+                    </div>
+                    <div class="terminal-line terminal-success">
+                        ✓ Found 8 relevant sources (2024 ACC/AHA)
+                    </div>
+                    <div class="terminal-line terminal-output">
+                        Current guidelines recommend initial therapy with...
+                    </div>
+                    <div class="terminal-line terminal-success">
+                        ✓ 100% on-premise • No data sent
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- The Problem -->
+<section id="about">
+    <div class="section-header">
+        <div class="section-label">The Problem</div>
+        <h2>Medical Information Shouldn't Cost Privacy</h2>
+        <p>Current AI tools force you to choose between capability and confidentiality. PineHealth gives you both.</p>
+    </div>
+    
+    <div class="problems-grid">
+        <div class="problem-card">
+            <div class="problem-icon">☁️</div>
+            <h3>Cloud AI Exposes Data</h3>
+            <p>Every query to ChatGPT, Claude, or GPT-4 sends your medical questions to external servers. Patient info, research, diagnoses—all transmitted and logged.</p>
+        </div>
+        
+        <div class="problem-card">
+            <div class="problem-icon">💰</div>
+            <h3>Usage Limits & Costs</h3>
+            <p>Cloud AI services throttle queries, charge per message, and restrict access. You're paying repeatedly for the same knowledge.</p>
+        </div>
+        
+        <div class="problem-card">
+            <div class="problem-icon">📚</div>
+            <h3>Generic Responses</h3>
+            <p>General-purpose AI can't access your specific textbooks, protocols, or organizational knowledge. You need answers from your library, not the internet.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Features -->
+<section id="features">
+    <div class="section-header">
+        <div class="section-label">Features</div>
+        <h2>Privacy-First Medical Intelligence</h2>
+        <p>Powerful AI capabilities without compromising data sovereignty.</p>
+    </div>
+    
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">🔒</div>
+            <h3>100% On-Premise</h3>
+            <p>Everything runs on your hardware. Medical documents, AI models, queries, and responses never touch the internet. Complete HIPAA compliance by design.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">📖</div>
+            <h3>Your Content, Your AI</h3>
+            <p>Ingest your existing medical libraries—textbooks, guidelines, protocols, research papers. PineHealth learns from your specific knowledge base.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">∞</div>
+            <h3>Unlimited Queries</h3>
+            <p>No usage limits, no per-message fees, no throttling. Ask as many questions as you need—the system runs on your infrastructure.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">🌐</div>
+            <h3>Network Isolated</h3>
+            <p>Deploy on air-gapped networks or behind your firewall. Zero external dependencies mean complete control over data flow and access.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>Fast & Accurate</h3>
+            <p>Optimized vector search with citation tracking. Get answers in seconds with source references for verification and compliance.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">🛠️</div>
+            <h3>Simple Deployment</h3>
+            <p>Runs on standard hardware—laptops, servers, or existing infrastructure. No specialized equipment or cloud accounts required.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Use Cases - ENHANCED -->
+<section id="use-cases">
+    <div class="section-header">
+        <div class="section-label">Use Cases</div>
+        <h2>Same Platform. Different Contexts.</h2>
+        <p>PineHealth adapts to your needs—whether you're an individual, a small practice, a nonprofit, or a large organization.</p>
+    </div>
+    
+    <div class="use-cases-grid">
+        <!-- Individual Users -->
+        <div class="use-case">
+            <div class="use-case-label">For Individuals</div>
+            <div class="use-case-header">
+                <div class="use-case-icon">👤</div>
+                <h3>Personal Health Research</h3>
+            </div>
+            <p>Turn your medical library into a private AI advisor. Perfect for families managing chronic conditions, health enthusiasts, or anyone seeking medical information without cloud surveillance.</p>
+            
+            <div class="use-case-details">
+                <h4>What You Get:</h4>
+                <ul>
+                    <li>Query your own medical books privately</li>
+                    <li>Research conditions and treatments offline</li>
+                    <li>No data sharing with tech companies</li>
+                    <li>One-time setup, lifetime access</li>
+                </ul>
+                
+                <div class="use-case-outcome">
+                    <strong>Deployment Model:</strong>
+                    <p>Self-hosted on your laptop or home server. Complete ownership and privacy.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Small Medical Practices -->
+        <div class="use-case">
+            <div class="use-case-label">For Small Practices</div>
+            <div class="use-case-header">
+                <div class="use-case-icon">🩺</div>
+                <h3>Clinical Decision Support</h3>
+            </div>
+            <p>Solo practitioners and small clinics get enterprise-grade medical AI without enterprise costs. Reference protocols, check interactions, and verify treatments—all within your private network.</p>
+            
+            <div class="use-case-details">
+                <h4>What You Get:</h4>
+                <ul>
+                    <li>Instant protocol lookups during consultations</li>
+                    <li>Drug interaction verification</li>
+                    <li>Evidence-based guideline access</li>
+                    <li>HIPAA-compliant by design</li>
+                </ul>
+                
+                <div class="use-case-outcome">
+                    <strong>Deployment Model:</strong>
+                    <p>Office server or dedicated workstation. Optional managed setup and training available.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nonprofits & Community Health -->
+        <div class="use-case">
+            <div class="use-case-label">For Nonprofits</div>
+            <div class="use-case-header">
+                <div class="use-case-icon">🏥</div>
+                <h3>Accessible Medical Knowledge</h3>
+            </div>
+            <p>Community health centers and nonprofits can make medical libraries conversational and accessible to underserved populations—without compromising patient privacy or paying cloud fees.</p>
+            
+            <div class="use-case-details">
+                <h4>What You Get:</h4>
+                <ul>
+                    <li>Democratize access to medical knowledge</li>
+                    <li>Serve patients in multiple languages</li>
+                    <li>Zero recurring cloud costs</li>
+                    <li>Community health education tool</li>
+                </ul>
+                
+                <div class="use-case-outcome">
+                    <strong>Deployment Model:</strong>
+                    <p>On-premise at your facility. Special pricing and implementation support for qualified nonprofits.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Healthcare Organizations -->
+        <div class="use-case">
+            <div class="use-case-label">For Organizations</div>
+            <div class="use-case-header">
+                <div class="use-case-icon">🏢</div>
+                <h3>Enterprise Medical AI</h3>
+            </div>
+            <p>Hospitals, medical groups, and healthcare organizations deploy private AI across departments. Full control, complete compliance, zero external data transmission.</p>
+            
+            <div class="use-case-details">
+                <h4>What You Get:</h4>
+                <ul>
+                    <li>Organization-wide knowledge sharing</li>
+                    <li>Custom medical library integration</li>
+                    <li>Multi-user deployment options</li>
+                    <li>Air-gapped network compatibility</li>
+                </ul>
+                
+                <div class="use-case-outcome">
+                    <strong>Deployment Model:</strong>
+                    <p>Enterprise installation with full technical support, training, and ongoing maintenance packages.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works -->
+<section id="how-it-works">
+    <div class="section-header">
+        <div class="section-label">How It Works</div>
+        <h2>From PDFs to Expert AI in 3 Steps</h2>
+        <p>Simple setup, powerful results. Get your medical knowledge base running in under an hour.</p>
+    </div>
+    
+    <div class="flow-steps">
+        <div class="flow-step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+                <h3>Install & Configure</h3>
+                <p>Download PineHealth and run the installer. Works on any modern laptop or server. No cloud accounts, no API keys, no external dependencies.</p>
+            </div>
+        </div>
+        
+        <div class="flow-step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+                <h3>Add Your Documents</h3>
+                <p>Drag and drop medical textbooks, clinical guidelines, research papers, or protocol documents. PineHealth processes and indexes them locally—nothing leaves your machine.</p>
+            </div>
+        </div>
+        
+        <div class="flow-step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+                <h3>Ask Questions</h3>
+                <p>Query your knowledge base in natural language. Get instant answers with citations. All processing happens on your hardware—never in the cloud.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Implementation Models -->
+<section style="background: rgba(10,31,26,0.2);">
+    <div class="section-header">
+        <div class="section-label">Implementation</div>
+        <h2>Deployment Models for Every Need</h2>
+        <p>Choose the setup that fits your technical capability and organizational requirements.</p>
+    </div>
+    
+    <div class="implementation-grid">
+        <div class="implementation-card">
+            <div class="implementation-badge">DIY</div>
+            <h3>Self-Hosted</h3>
+            <p>Download, install, and run PineHealth on your own hardware. Perfect for tech-savvy individuals and small teams.</p>
+            
+            <ul class="implementation-features">
+                <li>One-time license fee</li>
+                <li>Complete documentation</li>
+                <li>Community support forum</li>
+                <li>All future updates included</li>
+            </ul>
+            
+            <a href="#pilot" class="implementation-cta">
+                Get Started →
+            </a>
+        </div>
+
+        <div class="implementation-card">
+            <div class="implementation-badge">Assisted</div>
+            <h3>Managed Deployment</h3>
+            <p>We handle installation, configuration, and initial training. You get up and running faster with expert guidance.</p>
+            
+            <ul class="implementation-features">
+                <li>Remote setup assistance</li>
+                <li>Custom configuration</li>
+                <li>Staff training sessions</li>
+                <li>30-day launch support</li>
+            </ul>
+            
+            <a href="#pilot" class="implementation-cta">
+                Schedule Consultation →
+            </a>
+        </div>
+
+        <div class="implementation-card">
+            <div class="implementation-badge">Full Service</div>
+            <h3>Enterprise Installation</h3>
+            <p>White-glove deployment for healthcare organizations. On-site installation, integration, and ongoing technical support.</p>
+            
+            <ul class="implementation-features">
+                <li>On-site installation</li>
+                <li>Network integration</li>
+                <li>Custom feature development</li>
+                <li>Dedicated support team</li>
+            </ul>
+            
+            <a href="#pilot" class="implementation-cta">
+                Request Demo →
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Demo Section -->
+<section id="demo" class="demo-section">
+    <div class="section-header">
+        <div class="section-label">Live Demo</div>
+        <h2>Try PineHealth Now</h2>
+        <p>Connect to our hosted demo instance and see the system in action. (Demo runs intermittently—check if we're online!)</p>
+    </div>
+    
+    <div class="demo-container">
+        <div class="demo-box">
+            <div class="demo-status">
+                <span class="status-dot" id="demoStatusDot"></span>
+                <span id="demoStatusText">Paste key to connect</span>
+            </div>
+            
+            <div class="demo-input-group">
+                <input 
+                    type="text" 
+                    class="demo-input" 
+                    id="ngrokInput"
+                    placeholder="Paste ngrok URL here (e.g., abc123.ngrok.io)"
+                    aria-label="Connection key input"
+                >
+                <button class="demo-button" id="demoConnectBtn" onclick="connectToDemo()">
+                    Enter Grove
+                </button>
+            </div>
+            
+            <div class="demo-error" id="demoError"></div>
+            
+            <div class="demo-help">
+                <h4> 
+                    <img src="https://i.imgur.com/YEjOO2w.png" alt="PineHealth icon" style="width: 42px; height: 42px; margin-right: 8px; vertical-align: middle;">
+                    How to Connect
+                </h4>
+                <p>The demo requires a connection key (ngrok URL) to access. This is intentionally manual to control demo availability.</p>
+                <p><strong>Don't have a key?</strong> Email <code><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d1b9b4bdbdbe91a1b8bfb4b2bebca1a4a5b4bfbbffb2bebc">[email&#160;protected]</a></code> to request demo access.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pilot Program CTA -->
+<section id="pilot" class="cta-section">
+    <div class="cta-content">
+        <h2>Join the PineHealth Pilot Program</h2>
+        <p>Be among the first to deploy private medical AI. Limited spots available for individuals, practices, and organizations who value data sovereignty.</p>
+        
+        <div class="cta-buttons">
+            <div class="cta-option">
+                <h4>👤 Individual Use</h4>
+                <p>Personal health research and family medical information management</p>
+            </div>
+            <div class="cta-option">
+                <h4>🏥 Organization Deployment</h4>
+                <p>Clinical practices, nonprofits, hospitals, and healthcare groups</p>
+            </div>
+        </div>
+
+        <form class="pilot-form" name="pilot-signup" method="POST" data-netlify="true" id="pilotForm">
+            <!-- This hidden field tells Netlify which form this is -->
+            <input type="hidden" name="form-name" value="pilot-signup">
+            
+            <!-- NEW: Name field -->
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input 
+                    type="text" 
+                    id="name" 
+                    name="name" 
+                    required 
+                    placeholder="John Smith"
+                    aria-label="Full name"
+                >
+            </div>
+            
+            <!-- Existing email field -->
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    required 
+                    placeholder="your@email.com"
+                    aria-label="Email address"
+                >
+            </div>
+            
+            <!-- NEW: Type dropdown -->
+            <div class="form-group">
+                <label for="type">I'm interested as:</label>
+                <select 
+                    id="type" 
+                    name="type" 
+                    required
+                    aria-label="Select account type"
+                >
+                    <option value="">-- Please Select --</option>
+                    <option value="Individual">Individual</option>
+                    <option value="Organization">Organization</option>
+                </select>
+            </div>
+            
+            <button type="submit" class="submit-button" id="submitBtn">
+                Request Access
+            </button>
+            
+            <div class="form-status" id="formStatus"></div>
+        </form>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-grid">
+            <div class="footer-section">
+                <h4>🌲 PineHealth</h4>
+                <p>Private medical AI platform that runs entirely on-premise. Built by PineCompute for everyone who values data sovereignty—from individuals to enterprises.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul class="footer-links">
+                    <li><a href="https://pinecomputenj.com">← PineCompute Home</a></li>
+                    <li><a href="https://pinecomputenj.com/founders.html">Meet the Founders</a></li>
+                    <li><a href="/cdn-cgi/l/email-protection#d1b9b4bdbdbe91a1b8bfb4b2bebca1a4a5b4bfbbffb2bebc">Contact Us</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Product</h4>
+                <ul class="footer-links">
+                    <li><a href="#about">About PineHealth</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#use-cases">Use Cases</a></li>
+                    <li><a href="#demo">Live Demo</a></li>
+                    <li><a href="#pilot">Join Pilot Program</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul class="footer-links">
+                    <li><a href="https://pinecomputenj.com#privacy">Privacy Policy</a></li>
+                    <li><a href="https://pinecomputenj.com#terms">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 PineCompute. All rights reserved. Built with 🌲 for privacy-first AI.</p>
+        </div>
+    </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // =====================================================
+    // EMAILJS INITIALIZATION
+    // =====================================================
+    (function() {
+        emailjs.init({
+            publicKey: "EfxBxbGmPTDxpfh0q"
+        });
+        console.log('EmailJS initialized successfully!');
+    })();
+
+    // =====================================================
+    // CONFIGURATION
+    // =====================================================
+    const EMAILJS_SERVICE_ID = 'service_4nxyiaj';
+    const EMAILJS_NEW_LEAD_TEMPLATE = 'template_4706cb1';
+    const EMAILJS_THANK_YOU_TEMPLATE = 'template_xy2051h';
+
+    // =====================================================
+    // FORM SUBMISSION
+    // =====================================================
+    const form = document.getElementById('pilotForm');
+    const emailInput = document.getElementById('email');
+    const submitBtn = document.getElementById('submitBtn');
+    const formStatus = document.getElementById('formStatus');
+
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const email = emailInput.value.trim();
+        
+        if (!email) {
+            showStatus('Please enter a valid email address.', 'error');
+            return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Submitting...';
+        formStatus.textContent = '';
+
+        try {
+            console.log('Attempting to send emails...');
+            console.log('Service ID:', EMAILJS_SERVICE_ID);
+            console.log('Notification Template:', EMAILJS_NEW_LEAD_TEMPLATE);
+            console.log('Thank You Template:', EMAILJS_THANK_YOU_TEMPLATE);
+
+            const params = {
+                user_email: email,
+                to_email: email,
+                user_name: 'PineHealth User',
+                organization: 'PineHealth',
+                interest: 'Medical AI Platform',
+                message: `New PineHealth pilot request from: ${email}`
+            };
+
+            // Send thank you email to the user
+            const thankYouResponse = await emailjs.send(
+                EMAILJS_SERVICE_ID, 
+                EMAILJS_THANK_YOU_TEMPLATE, 
+                params
+            );
+            console.log('✓ Thank You email sent to user:', thankYouResponse);
+
+            // Send notification to Kyle
+            const newLeadResponse = await emailjs.send(
+                EMAILJS_SERVICE_ID, 
+                EMAILJS_NEW_LEAD_TEMPLATE, 
+                params
+            );
+            console.log('✓ Notification email sent:', newLeadResponse);
+
+            // Submit to Netlify as backup (optional)
+            try {
+                const formData = new FormData(form);
+                await fetch('/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams(formData).toString()
+                });
+                console.log('✓ Netlify form submitted successfully!');
+            } catch (netlifyError) {
+                console.warn('Netlify submission failed (non-critical):', netlifyError);
+            }
+
+            showStatus('🎉 Success! Check your inbox for a confirmation email. We\'ll be in touch within 48 hours.', 'success');
+            emailInput.value = '';
+            submitBtn.textContent = 'Submitted ✓';
+
+        } catch (error) {
+            console.error('❌ Form submission error:', error);
+            console.error('Error details:', {
+                message: error.message,
+                name: error.name,
+                stack: error.stack
+            });
+            
+            let errorMessage = 'Something went wrong. Please try again or email us directly.';
+            
+            if (error.message.includes('template')) {
+                errorMessage = 'Template configuration issue. Please contact us directly.';
+            } else if (error.message.includes('service')) {
+                errorMessage = 'Service configuration issue. Please contact us directly.';
+            }
+            
+            showStatus(errorMessage, 'error');
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Request Access';
+        }
+    });
+
+    function showStatus(message, type) {
+        formStatus.textContent = message;
+        formStatus.className = 'form-status ' + type;
+    }
+
+    // =====================================================
+    // MOBILE MENU
+    // =====================================================
+    function toggleMenu() {
+        const menu = document.getElementById('mobileMenu');
+        const toggle = document.querySelector('.menu-toggle');
+        menu.classList.toggle('active');
+        toggle.classList.toggle('active');
+    }
+    
+    function closeMenu() {
+        const menu = document.getElementById('mobileMenu');
+        const toggle = document.querySelector('.menu-toggle');
+        menu.classList.remove('active');
+        toggle.classList.remove('active');
+    }
+
+    // =====================================================
+    // SCROLL ANIMATIONS
+    // =====================================================
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animation = 'fadeInUp 0.8s ease-out';
+                entry.target.style.opacity = 1;
+            }
+        });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.feature-card, .use-case, .problem-card, .flow-step, .implementation-card').forEach(el => {
+        el.style.opacity = 0;
+        observer.observe(el);
+    });
+
+    // =====================================================
+    // TERMINAL ANIMATION LOOP
+    // =====================================================
+    setInterval(() => {
+        document.querySelectorAll('.terminal-line').forEach(line => {
+            line.style.opacity = 0;
+            line.style.animation = 'none';
+            setTimeout(() => line.style.animation = '', 10);
+        });
+    }, 12000);
+
+    // =====================================================
+    // DEMO CONNECTION
+    // =====================================================
+    const ngrokInput = document.getElementById('ngrokInput');
+    const demoConnectBtn = document.getElementById('demoConnectBtn');
+    const demoError = document.getElementById('demoError');
+    const demoStatusDot = document.getElementById('demoStatusDot');
+    const demoStatusText = document.getElementById('demoStatusText');
+
+    ngrokInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            connectToDemo();
+        }
+    });
+
+    ngrokInput.addEventListener('input', function() {
+        demoError.classList.remove('show');
+        if (ngrokInput.value.trim()) {
+            demoStatusText.textContent = 'Ready to connect';
+        } else {
+            demoStatusText.textContent = 'Paste key to connect';
+        }
+    });
+
+    async function connectToDemo() {
+        let url = ngrokInput.value.trim();
+        
+        if (!url) {
+            showDemoError('Please paste a connection key (ngrok URL)');
+            return;
+        }
+
+        if (!url.startsWith('http://') && !url.startsWith('https://')) {
+            url = 'https://' + url;
+        }
+        
+        url = url.replace(/\/+$/, '');
+
+        try {
+            new URL(url);
+        } catch {
+            showDemoError('Invalid URL format. Please check the connection key.');
+            return;
+        }
+
+        demoConnectBtn.disabled = true;
+        demoConnectBtn.textContent = 'Connecting...';
+        demoStatusText.textContent = 'Checking connection...';
+        demoError.classList.remove('show');
+
+        try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 8000);
+            
+            const response = await fetch(url + '/api/health', {
+                signal: controller.signal,
+                mode: 'cors'
+            });
+            
+            clearTimeout(timeoutId);
+
+            if (response.ok) {
+                demoStatusDot.classList.add('live');
+                demoStatusText.textContent = 'Connected! Entering...';
+                
+                setTimeout(() => {
+                    window.open(url + '/demo.html', '_blank');
+                    
+                    demoConnectBtn.disabled = false;
+                    demoConnectBtn.textContent = 'Enter Grove';
+                    demoStatusText.textContent = 'Connection successful';
+                }, 500);
+            } else {
+                throw new Error('Server responded but may not be ready');
+            }
+        } catch (error) {
+            demoConnectBtn.disabled = false;
+            demoConnectBtn.textContent = 'Enter Grove';
+            demoStatusDot.classList.remove('live');
+            
+            if (error.name === 'AbortError') {
+                showDemoError('Connection timed out. The demo server may not be running right now.');
+                demoStatusText.textContent = 'Connection failed';
+            } else {
+                showDemoError('Could not verify connection. Click below to try anyway.');
+                demoStatusText.textContent = 'Verification failed';
+                
+                const tryAnyway = document.createElement('a');
+                tryAnyway.href = url + '/demo.html';
+                tryAnyway.target = '_blank';
+                tryAnyway.style.cssText = 'display:block;margin-top:0.5rem;color:var(--glow);text-decoration:underline;font-size:0.85rem;';
+                tryAnyway.textContent = '→ Open demo anyway';
+                demoError.appendChild(tryAnyway);
+            }
+        }
+    }
+
+    function showDemoError(message) {
+        demoError.textContent = message;
+        demoError.classList.add('show');
+    }
+</script>
+
+</body>
+</html>

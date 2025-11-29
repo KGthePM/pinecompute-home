@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meet the Founders - PineCompute</title>
+    <meta name="description" content="Meet Kyle and David, the founders behind PineCompute's mission to build privacy-first AI solutions that help small businesses leverage their company knowledge without compromising data security.">
+    <meta name="theme-color" content="#0f4c3a" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;}
+        :root{
+            --void:#020617;--deep:#0a1f1a;--pine:#0f4c3a;--mist:#1a6b4f;
+            --glow:#2dd4bf;--glow-dark:#20a89a;--fog:#94a3b8;--smoke:#f8fafc;
+            --gradient-1:linear-gradient(135deg,#0a1f1a 0%,#0f4c3a 100%);
+            --gradient-2:linear-gradient(135deg,#2dd4bf 0%,#0a1f1a 100%);
+        }
+        body{
+            font-family:'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height:1.7;color:var(--fog);background:var(--void);overflow-x:hidden;
+        }
+        html{scroll-behavior:smooth;}
+
+        /* Veil Banner - matches your main site */
+        .veil {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: rgba(10,31,26,0.96);
+            backdrop-filter: blur(8px);
+            color: var(--glow);
+            text-align: center;
+            padding: 0.75rem 1rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            z-index: 10000;
+            border-bottom: 1px solid var(--glow);
+            animation: pulse 4s infinite;
+        }
+        @keyframes pulse { 0%,100% { opacity: 0.9; } 50% { opacity: 1; } }
+
+        /* Nav - matches your main site */
+        nav {
+            position: fixed;
+            top: 48px;
+            width: 100%;
+            background: rgba(2,6,23,0.75);
+            backdrop-filter: blur(16px);
+            z-index: 9999;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid rgba(45,212,191,0.12);
+        }
+        .nav-container {
+            max-width: 1280px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-weight: 900;
+            font-size: 1.3rem;
+            color: var(--glow);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+        .pine-icon {
+            width: 34px; height: 34px;
+            background: linear-gradient(135deg, var(--glow), var(--pine));
+            border-radius: 8px;
+            display: grid;
+            place-items: center;
+            font-size: 1.1rem;
+            animation: float 6s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+        .pine-icon::before { 
+            content: "";
+            display: inline-block;
+            width: 38px;
+            height: 38px;
+            background-image: url('https://i.imgur.com/BAxbCVs.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        @keyframes float {
+            0%,100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--fog);
+            text-decoration: none;
+            font-weight: 500;
+            opacity: 0.8;
+            transition: all .3s;
+        }
+        .nav-links a:hover { opacity: 1; color: var(--glow); }
+        .cta-button {
+            background: linear-gradient(135deg, var(--glow), var(--glow-dark));
+            color: #fff;
+            padding: 0.65rem 1.4rem;
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(45,212,191,0.3);
+            transition: all .3s;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(45,212,191,0.4);
+        }
+
+        /* Hero */
+        .hero{
+            min-height:100vh;padding:12rem 2rem 6rem;display:flex;align-items:center;
+            background:radial-gradient(circle at center,#0a1f1a 0%,#020617 100%);position:relative;overflow:hidden;
+        }
+        .hero::before{
+            content:"";position:absolute;inset:0;
+            background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="none" stroke="%232dd4bf20" stroke-width="0.5" d="M0 50h100M50 0v100"/></svg>') repeat;
+            opacity:0.03;animation:drift 40s linear infinite;
+        }
+        @keyframes drift{from{background-position:0 0}to{background-position:100px 100px}}
+        .hero-container{max-width:1200px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+        .hero-content h1{font-size:3.8rem;font-weight:900;line-height:1.05;background:linear-gradient(135deg, #2dd4bf, #94a3b8);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:fadeInUp 1s ease-out;}
+        .hero-content p{font-size:1.3rem;opacity:0.8;margin:1.5rem 0 2rem;animation:fadeInUp 1s ease-out .2s both;}
+        .hero-buttons{display:flex;gap:1rem;animation:fadeInUp 1s ease-out .4s both;}
+        .primary-button{background:linear-gradient(135deg, var(--glow), var(--glow-dark));color:#fff;padding:1rem 2rem;border-radius:12px;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;box-shadow:0 8px 30px rgba(45,212,191,0.35);transition:all .3s;}
+        .primary-button:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(45,212,191,0.5);}
+        .secondary-button{background:transparent;color:var(--glow);padding:1rem 2rem;border:2px solid var(--glow);border-radius:12px;font-weight:600;text-decoration:none;transition:all .3s;}
+        .secondary-button:hover{background:var(--glow);color:var(--deep);}
+
+        /* Portrait */
+        .portrait{
+            position:relative;animation:fadeInUp 1s ease-out .6s both;
+        }
+        .portrait img{
+            width:100%;border-radius:16px;filter:brightness(0.9);object-fit:cover;height:520px;
+            box-shadow:0 30px 60px rgba(0,0,0,0.5);
+        }
+        .portrait::after{
+            content:"";position:absolute;inset:0;background:linear-gradient(transparent 60%,var(--void) 100%);
+            border-radius:16px;pointer-events:none;
+        }
+        .portrait-caption{
+            position:absolute;bottom:2rem;left:2rem;color:var(--glow);font-size:1.1rem;font-weight:600;
+            text-shadow:0 2px 10px rgba(0,0,0,0.8);
+        }
+
+        /* Founder Bio */
+        .bio{
+            padding:6rem 2rem;background:var(--deep);
+        }
+        .bio-container{max-width:900px;margin:auto;}
+        .bio h2{font-size:2.8rem;font-weight:800;margin-bottom:1.5rem;color:var(--glow);text-align:center;}
+        .bio p{opacity:0.85;font-size:1.15rem;margin-bottom:1.5rem;line-height:1.8;}
+        .quote{
+            font-style:italic;font-size:1.3rem;color:var(--glow);margin:3rem auto;padding:2rem;
+            border-left:4px solid var(--glow);max-width:700px;background:rgba(45,212,191,0.05);
+        }
+
+        /* Co-founder Section */
+        .cofounder{
+            padding:4rem 2rem;background:var(--void);
+        }
+        .cofounder-container{max-width:900px;margin:auto;}
+        .cofounder h3{font-size:2rem;font-weight:700;margin-bottom:1rem;color:var(--glow);}
+        .cofounder p{opacity:0.85;font-size:1.1rem;margin-bottom:1rem;line-height:1.8;}
+
+        /* Journey Section */
+        .journey {
+            padding: 6rem 2rem;
+            background: var(--deep);
+        }
+        .journey-container {
+            max-width: 900px;
+            margin: auto;
+        }
+        .journey h2 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            color: var(--glow);
+            text-align: center;
+        }
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background: var(--glow);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            opacity: 0.3;
+        }
+        .timeline-item {
+            margin-bottom: 3rem;
+            position: relative;
+            width: 50%;
+            padding: 1rem 2rem;
+        }
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            text-align: right;
+            padding-right: 3rem;
+        }
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            text-align: left;
+            padding-left: 3rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: var(--glow);
+            border-radius: 50%;
+            top: 1.5rem;
+        }
+        .timeline-item:nth-child(odd)::before {
+            right: -8px;
+        }
+        .timeline-item:nth-child(even)::before {
+            left: -8px;
+        }
+        .timeline-item h3 {
+            font-size: 1.4rem;
+            color: var(--glow);
+            margin-bottom: 0.5rem;
+        }
+        .timeline-item .date {
+            font-size: 0.95rem;
+            opacity: 0.6;
+            margin-bottom: 0.75rem;
+        }
+
+        /* Skills Section */
+        .skills {
+            padding: 6rem 2rem;
+            background: var(--void);
+        }
+        .skills-container {
+            max-width: 1000px;
+            margin: auto;
+        }
+        .skills h2 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 2.5rem;
+            color: var(--glow);
+            text-align: center;
+        }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+        }
+        .skill-item {
+            background: rgba(45,212,191,0.08);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(45,212,191,0.2);
+            text-align: center;
+            font-weight: 600;
+            transition: all .3s;
+        }
+        .skill-item:hover {
+            background: rgba(45,212,191,0.15);
+            transform: translateY(-4px);
+            border-color: var(--glow);
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 6rem 2rem;
+            background: var(--deep);
+        }
+        .projects-container {
+            max-width: 1100px;
+            margin: auto;
+        }
+        .projects h2 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 3rem;
+            color: var(--glow);
+            text-align: center;
+        }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .project-card {
+            background: rgba(10,31,26,0.5);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(45,212,191,0.2);
+            transition: all .3s;
+        }
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--glow);
+            box-shadow: 0 20px 40px rgba(45,212,191,0.2);
+        }
+        .project-card h3 {
+            font-size: 1.5rem;
+            color: var(--glow);
+            margin-bottom: 1rem;
+        }
+        .project-card p {
+            opacity: 0.85;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .tech-tag {
+            background: rgba(45,212,191,0.15);
+            color: var(--glow);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* Early Access / Contact Section */
+        .early-access {
+            padding: 6rem 2rem;
+            background: var(--void);
+            text-align: center;
+        }
+        .early-access h2 {
+            font-size: 2.6rem;
+            color: var(--glow);
+            margin-bottom: 1rem;
+        }
+        .early-access p {
+            opacity: 0.8;
+            max-width: 600px;
+            margin: auto;
+            margin-bottom: 2rem;
+        }
+        .email-signup {
+            display: flex;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 2rem auto;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .email-input {
+            flex: 1;
+            min-width: 250px;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            border: 2px solid rgba(45,212,191,0.3);
+            background: rgba(45,212,191,0.05);
+            color: var(--fog);
+            font-size: 1rem;
+            outline: none;
+            transition: all .3s;
+        }
+        .email-input:focus {
+            border-color: var(--glow);
+            background: rgba(45,212,191,0.1);
+        }
+        .submit-button {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--glow), var(--glow-dark));
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .3s;
+            font-size: 1rem;
+        }
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(45,212,191,0.4);
+        }
+        .submit-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Success message */
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+            background: rgba(45,212,191,0.1);
+            border-radius: 12px;
+            margin: 2rem auto;
+            max-width: 500px;
+        }
+        .success-message.show {
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--deep);
+            padding: 3rem 2rem 1.5rem;
+        }
+        .footer-container {
+            max-width: 1200px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .footer-section h4 {
+            color: var(--glow);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        .footer-section a {
+            display: block;
+            color: var(--fog);
+            text-decoration: none;
+            opacity: 0.7;
+            margin-bottom: 0.5rem;
+            transition: all .3s;
+        }
+        .footer-section a:hover {
+            opacity: 1;
+            color: var(--glow);
+            padding-left: 0.5rem;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            .timeline::before {
+                left: 0;
+            }
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+                text-align: left !important;
+                padding-left: 3rem !important;
+                padding-right: 1rem !important;
+            }
+            .timeline-item::before {
+                left: -8px !important;
+            }
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Veil Banner -->
+    <div class="veil">
+        🚧 We're building. Follow our journey from R&D to launch.
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="pine-icon"></div>
+                PineCompute - Founders
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#what">What We Build</a></li>
+                <li><a href="PineHealth.html">PineHealth</a></li>
+                <li><a href="pinecomputecore.html">PineCompute Core</a></li>
+                <li><a href="founders.html">Team</a></li>
+                <li><a href="index.html#contact" class="cta-button">Get In Touch</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Meet the Founders</h1>
+                <p>Building the future of private, on-premise AI for small businesses.</p>
+                <div class="hero-buttons">
+                    <a href="#bio" class="primary-button">Read Our Story</a>
+                    <a href="index.html#contact" class="secondary-button">Let's Talk</a>
+                </div>
+            </div>
+            <div class="portrait">
+                <!-- Replace this with your actual photo -->
+                <img src="https://i.imgur.com/QWKvu86.jpeg" alt="Kyle - Founder of PineCompute">
+                <div class="portrait-caption">Kyle – Founder & Lead Developer</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bio Section -->
+    <section id="bio" class="bio">
+        <div class="bio-container">
+            <h2>Kyle's Story</h2>
+            <p>I'm Kyle, the founder of PineCompute. My path to AI started unconventionally: studying neuroscience at Boston University, I became obsessed with how brains retrieve information—how context triggers memory, how associations form, how decision-making actually works. That curiosity shaped everything that came after.</p>
+            
+            <p>When I started building AI systems, I realized that retrieval-augmented generation wasn't just clever engineering—it was mimicking how human memory actually functions. And I realized something else: if I understand how minds work, I can build AI that respects how businesses work. So I built locally. No cloud vendor lock-in. No external dependencies. Just PrivateGPT, Ollama, and a 16GB Linux PC, solving real problems.</p>
+
+            <p>Over the years I've built everything from trading systems to survival apps to multiplayer games. But every single project taught me the same lesson: <strong>the best AI is the AI you control</strong>. Not the AI you rent from a vendor. The AI that lives on your hardware, touches only your data, and answers to you.</p>
+
+            <div class="quote">
+                "Small businesses deserve AI superpowers without vendor lock-in or privacy compromises. That's what we're building at PineCompute."
+            </div>
+
+            <p>Today, alongside co-founder David Rainear, I'm building PineCompute Core and other PineCompute—products that turn your private files into an expert assistant that never leaves your server. Because privacy isn't a premium feature. It's a foundation.</p>
+
+            <p>This isn't just another AI company. We're building something different: a philosophy where privacy, sovereignty, and intelligence coexist. Where you don't have to sacrifice control to get superpowers.</p>
+        </div>
+    </section>
+
+    <!-- David's Section -->
+    <section class="cofounder">
+        <div class="cofounder-container">
+            <h3>David Rainear – Co-Founder</h3>
+            <p>David Rainear brings complementary expertise to PineCompute as co-founder, working alongside Kyle to shape the company's strategic direction and product vision. Together, we're building solutions that give small businesses the AI superpowers that large enterprises take for granted—but without the vendor lock-in or privacy compromises.</p>
+            <p style="font-size:0.95rem;opacity:0.7;font-style:italic;">A detailed profile for David is coming soon. For now, reach out if you'd like to connect with our full founding team.</p>
+        </div>
+    </section>
+
+    <!-- Journey/Timeline Section -->
+    <section id="journey" class="journey">
+        <div class="journey-container">
+            <h2>Kyle's Journey to PineCompute</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>Founded PineCompute</h3>
+                    <div class="date">2024 – Present</div>
+                    <p>Partnering with David Rainear to build PineCompute Core an open-source, fully on-premise "company brain" for small businesses. Leading technical development of PineHealth and other privacy-first AI products that run entirely on local hardware.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Independent AI & Full-Stack Development</h3>
+                    <div class="date">2022 – 2024</div>
+                    <p>Dove deep into local AI deployment, building systems with PrivateGPT, Ollama, and vector databases. Created multiplayer games, crypto trading bots, and health AI prototypes—all while learning to bridge neuroscience insights with practical software engineering.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>AI & DevOps Experimentation</h3>
+                    <div class="date">2020 – 2022</div>
+                    <p>Specialized in deploying AI models locally using open-source tools. Optimized Linux environments for low-resource AI inference, experimented with vector databases (ChromaDB, FAISS), and built Gradio interfaces for offline AI applications.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Neuroscience Studies at Boston University</h3>
+                    <div class="date">2015</div>
+                    <p>Studied how biological neural networks process and retrieve information. This foundational understanding of memory, context, and association became the conceptual blueprint for building AI systems that augment human decision-making.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="skills-container">
+            <h2>Technical Expertise</h2>
+            <div class="skills-grid">
+                <div class="skill-item">Local AI Deployment (PrivateGPT, Ollama)</div>
+                <div class="skill-item">Vector Databases (Qdrant, ChromaDB)</div>
+                <div class="skill-item">Python & Node.js</div>
+                <div class="skill-item">React & Frontend Development</div>
+                <div class="skill-item">RAG Systems & Document Processing</div>
+                <div class="skill-item">Linux System Administration</div>
+                <div class="skill-item">LLM Fine-tuning & Prompt Engineering</div>
+                <div class="skill-item">Neuroscience-Inspired AI Design</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="projects-container">
+            <h2>Key Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>PineCompute Core</h3>
+                    <p>Open-source "company brain" that turns private files (PDFs, Drive folders, emails) into an expert LLM assistant. Fully on-premise with zero cloud dependencies—built on PrivateGPT backbone with custom interfaces.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">PrivateGPT</span>
+                        <span class="tech-tag">Ollama</span>
+                        <span class="tech-tag">Qdrant</span>
+                        <span class="tech-tag">Python</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>PineHealth</h3>
+                    <p>Medical AI system built on PrivateGPT that processes medical textbooks and provides health consultations. All data stays on local hardware—perfect for healthcare orgs concerned about HIPAA compliance.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">PrivateGPT</span>
+                        <span class="tech-tag">Medical NLP</span>
+                        <span class="tech-tag">Local RAG</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>COMING SOON...</h3>
+                    <p>Our Research Continues.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Top</span>
+                        <span class="tech-tag">Secret</span>
+                        <span class="tech-tag">Code</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA / Contact Section -->
+    <section id="early-access" class="early-access">
+        <h2>Let's Connect</h2>
+        <p>Interested in collaborating, investing, or learning more about PineCompute's mission? We'd love to hear from you.</p>
+        
+        <!-- Email Form -->
+        <form id="contact-form" class="email-signup" name="founders-contact" method="POST" data-netlify="true">
+            <input type="hidden" name="form-name" value="founders-contact">
+            <input type="email" name="email" class="email-input" placeholder="your.email@domain.com" required>
+            <button type="submit" class="submit-button">Send Message</button>
+        </form>
+        
+        <!-- Success Message -->
+        <div id="contact-success" class="success-message">
+            <div style="font-size:2.5rem; margin-bottom:1rem;">✉️</div>
+            <h3 style="color:var(--glow); font-size:1.4rem; margin-bottom:0.5rem;">Message sent!</h3>
+            <p style="opacity:0.8;">Thanks for reaching out. We'll get back to you within 24-48 hours.</p>
+        </div>
+        
+        <p style="font-size:0.9rem;opacity:0.7;margin-top:1.5rem;">Or email us directly at <a href="mailto:hello@pinecomputenj.com" style="color:var(--glow);">hello@pinecomputenj.com</a></p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="#bio">About Kyle</a>
+                <a href="#journey">Our Journey</a>
+                <a href="#skills">Technical Expertise</a>
+                <a href="#projects">Projects</a>
+            </div>
+            <div class="footer-section">
+                <h4>Company</h4>
+                <a href="index.html">PineCompute Home</a>
+                <a href="pinecomputecore.html">PineCompute Core</a>
+                <a href="PineHealth.html">PineHealth</a>
+                <a href="index.html#contact">Contact Us</a>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <a href="#">GitHub</a>
+                <a href="#">Documentation</a>
+            </div>
+        </div>
+        <div style="text-align:center;padding-top:2rem;border-top:1px solid rgba(255,255,255,0.1);font-size:0.8rem;opacity:0.6;">
+            © 2025 PineCompute. Built by Kyle. Private AI for sensitive industries.
+        </div>
+    </footer>
+
+    <!-- Scroll Animation Script -->
+    <script>
+        const obs = new IntersectionObserver(es=>es.forEach(e=>{
+            if(e.isIntersecting){
+                e.target.style.animation='fadeInUp .8s ease-out';
+                e.target.style.opacity=1;
+            }
+        }), {threshold:0.15});
+        
+        document.querySelectorAll('.bio p, .quote, .cofounder p, .timeline-item, .skill-item, .project-card').forEach(el=>{
+            el.style.opacity=0;
+            obs.observe(el);
+        });
+    </script>
+
+    <!-- EmailJS Integration -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        // Initialize EmailJS with your public key
+        emailjs.init("EfxBxbGmPTDxpfh0q");
+
+        // Contact Form Handler
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const form = this;
+            const submitBtn = form.querySelector('.submit-button');
+            const originalText = submitBtn.textContent;
+            
+            // Show loading state
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+            
+            const userEmail = form.email.value;
+            
+            const params = {
+                user_email: userEmail,
+                to_email: userEmail,  // For thank-you template
+                message: "Contact from Founders page - " + userEmail + " wants to connect"
+            };
+
+            // Send thank-you email to the visitor
+            emailjs.send("service_4nxyiaj", "template_xy2051h", params)
+                .then(() => {
+                    console.log("Thank-you email sent");
+                })
+                .catch((err) => {
+                    console.log("Thank-you email failed:", err);
+                });
+
+            // Send notification to you (Kyle)
+            emailjs.send("service_4nxyiaj", "template_4706cb1", params)
+                .then(() => {
+                    // Success! Show the success message
+                    form.style.display = 'none';
+                    document.getElementById('contact-success').classList.add('show');
+                    
+                    // Also submit to Netlify as backup (silently)
+                    fetch('/', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: new URLSearchParams(new FormData(form)).toString()
+                    }).catch(() => {}); // Ignore Netlify errors
+                })
+                .catch((err) => {
+                    console.log("Notification failed:", err);
+                    // Reset button and show error
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                    alert("Oops! Something went wrong. Please email hello@pinecomputenj.com directly.");
+                });
+        });
+    </script>
+
+    <!-- GoatCounter Analytics -->
+    <script data-goatcounter="https://pinecompute.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+
+</body>
+</html>
